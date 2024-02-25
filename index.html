@@ -5,22 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>New World Artifact Agenda</title>
 <style>
-  
 
-    body {        
-        color: #fff;
-        width: 100%;
-        height: 100vh;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to top, #181919, #5e5d5d);
+    html {        
+        min-height: 100vh;
     }
 
-    .container-wrapper-1, .container-wrapper-2 {                
+    body {
+        color: #fff;
+        width: 100%;
+        height:100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to top, #181919, #5e5d5d);
+        display: flex;
+    }
+
+    .container-wrapper-1, .container-wrapper-2 {
         margin: 0;
         padding: 0;
     }
@@ -29,7 +30,7 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         font-size: 24px;
         font-weight: bold;
-        color: #fff; /* Adjust color as needed */        
+        color: #fff;
     }
 
     .container {
@@ -38,7 +39,7 @@
         grid-auto-rows: auto;
         margin-top: 10px;
         margin-bottom: 10px;
-        grid-gap: 10px;        
+        grid-gap: 10px;
     }
 
     .icon {
@@ -48,7 +49,7 @@
         border: 2px solid transparent;
         border-radius: 5px;
         background-image: url('https://www.nw-buddy.de/assets/icons/item/itemraritybgsquareartifact.png');
-        background-size: cover; /* Optional: Cover the entire background */
+        background-size: cover;
         background-repeat: no-repeat;
     }
 
@@ -101,6 +102,14 @@
         border-color: rgba(0, 255, 0, 0.5);
     }
 
+    .icon.enabled {
+        display: block;
+    }
+
+    .icon.disabled {
+        display: none;
+    }
+
     .checkmark {
         position: absolute;
         top: 50%;
@@ -115,112 +124,162 @@
         display: block;
     }
 
-    footer {
+    .bottom-footer {
+        display:flex;
+        flex-direction: column;
         background-color: #333;
         color: #fff;
         text-align: center;
-        padding: 20px 0;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        width:100%;
+    }
+
+    button {
+        background: linear-gradient(to bottom, #777, #777);
+        color: #fff;
+        padding: 10px 20px; 
+        border: none; 
+        border-radius: 5px; 
+        font-size: 16px; 
+        cursor: pointer; 
+        transition: background-color 0.3s ease;
+        margin: 0 10px;
+    }
+
+    button:hover {
+        background: linear-gradient(to bottom, #000, #000);
+    }
+
+    .sections {
+        display:flex;
+        flex-direction:row;
+        justify-content: center;
+        height:100%;
+    }
+
+    .container-btn-header {
+        display:flex;
+        flex-direction:row;
+        justify-content:center;
+        margin:30px 0px;
+    }
+
+    .body-container {
+        display:flex;
+        flex-direction:column;
+        width:100%;
+        min-height:100vh;
+    }
+
+    .spacing {
+        margin: 0 120px;
     }
 </style>
 <script async src="https://nwdb.info/embed.js"></script>
 </head>
 <body>
-    
-    <div style="display:flex;flex-direction:row;">
-    <div class="container-wrapper-1">
+<div class="body-container">
+    <div class="container-btn-header">
+        <button id="seasonAll">All</button>
+        <button id="season3">S3</button>
+        <button id="season4">S4</button>
+        <button id="season5">S5</button>
     </div>
-    <div class="container-wrapper-2">
+    <div class="sections">
+        <div class="container-wrapper-1 spacing">
+        </div>
+        <div class="container-wrapper-2 spacing">
+        </div>    
     </div>
-</div>  
-
-<footer>
-    <p>Free to use/copy/change!</p>
-    <p>Credits for https://nwdb.info and https://www.nw-buddy.de</p>
-</footer>
-
+    <div class="bottom-footer">
+        <span>Disclaimer: Not responsive for mobile usage</span>
+        <span>Free to use/copy/change!</span>
+        <span>Credits for https://nwdb.info and https://www.nw-buddy.de</span>
+    </div>
+</div>
 <script>
-
 var nwdbConfig = {
     scale: 0.65,
     delay: 10
 }
-
 // Your CSV data
 var csvData = `name,type,image-src,link-href
-"1","Headwear","Unyielding","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyhelmet3_head.png","https://nwdb.info/db/item/artifact_set1_heavyhead"
-"1","Chestwear","Void Darkplate","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavychest6_chest.png","https://nwdb.info/db/item/artifact_set1_heavychest"
-"1","Gloves","Magnetic Gauntlets","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms1_gloves.png","https://nwdb.info/db/item/artifact_set1_heavyhands"
-"1","Legwear","Freedom","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumthighs3_legs.png","https://nwdb.info/db/item/artifact_set1_heavylegs"
-"1","Footwear","The Unmoved","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavycalves2_feet.png","https://nwdb.info/db/item/artifact_set1_heavyfeet"
-"1","Headwear","Djinn Headwrap","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_harbingermediumsmile_head.png","https://nwdb.info/db/item/artifact_set1_mediumhead"
-"1","Chestwear","Nimble Coat","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_wraithhunterlightnailst3_chest.png","https://nwdb.info/db/item/artifact_set1_mediumchest"
-"1","Gloves","Ghoul Gloves","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms2_gloves.png","https://nwdb.info/db/item/artifact_set1_mediumhands"
-"1","Legwear","Attuned Leather Pants","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumthighs1_legs.png","https://nwdb.info/db/item/artifact_set1_mediumlegs"
-"1","Footwear","Winged Leather Shoes","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumcalves1_feet.png","https://nwdb.info/db/item/artifact_set1_mediumfeet"
-"1","Headwear","Grey Wizard's Hat","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/cloth_setb_hat_t4.png","https://nwdb.info/db/item/artifact_set1_lighthead"
-"1","Chestwear","Featherweight","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarylightchest2_chest.png","https://nwdb.info/db/item/artifact_set1_lightchest"
-"1","Gloves","Quickdraw Gloves","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_nagacorruptedmedium_hands.png","https://nwdb.info/db/item/artifact_set1_lighthands"
-"1","Legwear","Koya's Knee Guards","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_nagacorruptedmedium_legs.png","https://nwdb.info/db/item/artifact_set1_lightlegs"
-"1","Footwear","Tumbler Feetwraps","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_hexencirce_feet.png","https://nwdb.info/db/item/artifact_set1_lightfeet"
-"2","1-Handed Weapons","The Butcher","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hswords3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hlongsword"
-"2","1-Handed Weapons","Freya's Francisca","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hhatchets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hthrowingaxe"
-"2","2-Handed Weapons","Spark of Mjölnir","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hwarhammers3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hwarhammer"
-"2","2-Handed Weapons","The Abyss","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hgreataxes3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hgreataxe"
-"2","2-Handed Weapons","Boltcaster","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hbows3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hbow"
-"2","2-Handed Weapons","The Mechanic","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hmuskets3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hmusket"
-"2","Shields","Gladiator","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hroundshields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hroundshield"
-"2","Shields","Michael","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hkiteshields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hkiteshield"
-"2","Shields","The Wall","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1htowershields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1htowershield"
-"2","Magical Weapons","Inferno","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hfirestaffs3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hstafffire"
-"2","Magical Weapons","Vengeance","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hlifestaffs3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hstafflife"
-"2","2-Handed Weapons","Scorpion's Sting","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hspears3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hspear"
-"2","1-Handed Weapons","Finisher","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hrapiers3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hrapier"
-"2","Magical Weapons","Deep Freeze","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hicegauntlets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hgauntletice"
-"2","Magical Weapons","Lifetaker","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hvoidgauntlets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hgauntletvoid"
-"2","2-Handed Weapons","Pestilence","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hblunderbusss3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hblunderbuss"
-"2","2-Handed Weapons","Serenity","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hgreatswords3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hgreatsword"
-"2","1-Handed Weapons","Odo","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hflails3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hflail"
-"1","Trinkets","Endless Thirst","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/angryearthearring30.png","https://nwdb.info/db/item/artifact_set1_earring1"
-"1","Trinkets","Blooddrinker","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/corruptedring20.png","https://nwdb.info/db/item/artifact_set1_ring1"
-"1","Trinkets","Lost Stopwatch","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/lostamulet10.png","https://nwdb.info/db/item/artifact_set1_amulet1"
-"1","Trinkets","Ankh","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/corruptedamulet30.png","https://nwdb.info/db/item/artifact_set1_amulet2"
+"1","S3","Headwear","Unyielding","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyhelmet3_head.png","https://nwdb.info/db/item/artifact_set1_heavyhead"
+"1","S3","Chestwear","Void Darkplate","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavychest6_chest.png","https://nwdb.info/db/item/artifact_set1_heavychest"
+"1","S3","Gloves","Magnetic Gauntlets","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms1_gloves.png","https://nwdb.info/db/item/artifact_set1_heavyhands"
+"1","S3","Legwear","Freedom","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumthighs3_legs.png","https://nwdb.info/db/item/artifact_set1_heavylegs"
+"1","S4","Footwear","The Unmoved","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavycalves2_feet.png","https://nwdb.info/db/item/artifact_set1_heavyfeet"
+"1","S3","Headwear","Djinn Headwrap","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_harbingermediumsmile_head.png","https://nwdb.info/db/item/artifact_set1_mediumhead"
+"1","S3","Chestwear","Nimble Coat","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_wraithhunterlightnailst3_chest.png","https://nwdb.info/db/item/artifact_set1_mediumchest"
+"1","S3","Gloves","Ghoul Gloves","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms2_gloves.png","https://nwdb.info/db/item/artifact_set1_mediumhands"
+"1","S3","Legwear","Attuned Leather Pants","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumthighs1_legs.png","https://nwdb.info/db/item/artifact_set1_mediumlegs"
+"1","S4","Footwear","Winged Leather Shoes","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumcalves1_feet.png","https://nwdb.info/db/item/artifact_set1_mediumfeet"
+"1","S3","Headwear","Grey Wizard's Hat","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/cloth_setb_hat_t4.png","https://nwdb.info/db/item/artifact_set1_lighthead"
+"1","S3","Chestwear","Featherweight","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarylightchest2_chest.png","https://nwdb.info/db/item/artifact_set1_lightchest"
+"1","S4","Gloves","Quickdraw Gloves","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_nagacorruptedmedium_hands.png","https://nwdb.info/db/item/artifact_set1_lighthands"
+"1","S4","Legwear","Koya's Knee Guards","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_nagacorruptedmedium_legs.png","https://nwdb.info/db/item/artifact_set1_lightlegs"
+"1","S3","Footwear","Tumbler Feetwraps","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_hexencirce_feet.png","https://nwdb.info/db/item/artifact_set1_lightfeet"
+"2","S3","1-Handed Weapons","The Butcher","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hswords3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hlongsword"
+"2","S3","1-Handed Weapons","Freya's Francisca","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hhatchets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hthrowingaxe"
+"2","S3","2-Handed Weapons","Spark of Mjölnir","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hwarhammers3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hwarhammer"
+"2","S3","2-Handed Weapons","The Abyss","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hgreataxes3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hgreataxe"
+"2","S4","2-Handed Weapons","Boltcaster","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hbows3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hbow"
+"2","S3","2-Handed Weapons","The Mechanic","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hmuskets3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hmusket"
+"2","S4","Shields","Gladiator","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hroundshields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hroundshield"
+"2","S3","Shields","Michael","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hkiteshields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hkiteshield"
+"2","S3","Shields","The Wall","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1htowershields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1htowershield"
+"2","S3","Magical Weapons","Inferno","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hfirestaffs3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hstafffire"
+"2","S4","Magical Weapons","Vengeance","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hlifestaffs3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hstafflife"
+"2","S3","2-Handed Weapons","Scorpion's Sting","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hspears3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hspear"
+"2","S3","1-Handed Weapons","Finisher","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hrapiers3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hrapier"
+"2","S4","Magical Weapons","Deep Freeze","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hicegauntlets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hgauntletice"
+"2","S3","Magical Weapons","Lifetaker","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hvoidgauntlets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hgauntletvoid"
+"2","S3","2-Handed Weapons","Pestilence","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hblunderbusss3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hblunderbuss"
+"2","S3","2-Handed Weapons","Serenity","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hgreatswords3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hgreatsword"
+"2","S3","1-Handed Weapons","Odo","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hflails3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hflail"
+"1","S3","Trinkets","Endless Thirst","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/angryearthearring30.png","https://nwdb.info/db/item/artifact_set1_earring1"
+"1","S3","Trinkets","Blooddrinker","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/corruptedring20.png","https://nwdb.info/db/item/artifact_set1_ring1"
+"1","S3","Trinkets","Lost Stopwatch","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/lostamulet10.png","https://nwdb.info/db/item/artifact_set1_amulet1"
+"1","S3","Trinkets","Ankh","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/corruptedamulet30.png","https://nwdb.info/db/item/artifact_set1_amulet2"
+"1","S5","Gloves","Gilli's Gravity Gauntlets","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_gravitygauntlets_gloves.png","https://ptr.nwdb.info/db/item/artifact_set2_heavyhands"
+"1","S5","Legwear","Ironheart","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_stabilitypants_legs.png","https://ptr.nwdb.info/db/item/artifact_set2_heavylegs"
+"1","S5","Chestwear","Nature's Wrath","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_natureswrath_chest.png","https://ptr.nwdb.info/db/item/artifact_set2_mediumchest"
+"1","S5","Footwear","Creed Boots","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_creedboots_feet.png","https://ptr.nwdb.info/db/item/artifact_set2_lightfeet"
+"2","S5","1-Handed Weapons","Sin","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/1hhatchetseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_1hthrowingaxe"
+"2","S5","2-Handed Weapons","Tempest Fury","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/2hgreataxeseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_2hgreataxe"
+"2","S5","2-Handed Weapons","Venom","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/2hspearseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_2hspear"
+"1","S5","Trinkets","Phoenix","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/ancientamulet13.png	","https://ptr.nwdb.info/db/item/artifact_set2_amulet1"
 `;
-
-
 var lines = csvData.trim().split('\n');
 var header = lines.shift();
 var containerWrapper1 = document.querySelector('.container-wrapper-1');
 var containerWrapper2 = document.querySelector('.container-wrapper-2');
 var structuredData = {};
-
-lines.forEach(function(line) {
+for(let i = 0; i != lines.length; i++){
+    let line = lines[i]
     var columns = line.split(',');
-    var panel = columns[0].replace(/\"/g, ''); 
-    var type = columns[1].replace(/\"/g, ''); 
-    var name = columns[2].replace(/\"/g, ''); 
-    var imageSrc = columns[3].replace(/\"/g, ''); 
-    var linkHref = columns[4].replace(/\"/g, ''); 
-
+    var panel = columns[0].replace(/\"/g, '').replace(/\s/g, "");; 
+    var season = columns[1].replace(/\"/g, ''); 
+    var type = columns[2].replace(/\"/g, ''); 
+    var name = columns[3].replace(/\"/g, ''); 
+    var imageSrc = columns[4].replace(/\"/g, ''); 
+    var linkHref = columns[5].replace(/\"/g, ''); 
     if(!structuredData[type]){
         structuredData[type] = []
     }
-
     structuredData[type].push(
         {
             container : panel === "1" ? containerWrapper1 : containerWrapper2,
+            season,
             name,
             imageSrc,
             linkHref
         }
     );
-});
-
+}
 var cookiesState = loadAgendaState()
-
-
 function toggleCheck(element, e, name){
     e.preventDefault()
     element.classList.toggle('checked');
@@ -235,17 +294,13 @@ function toggleCheck(element, e, name){
     } 
     
 }
-
 for (const [key,value] of Object.entries(structuredData)) {
     var header = document.createElement('span')
     header.classList.add('container-header')
-    header.innerText = key
-
+    header.innerText = key    
     value[0].container.appendChild(header)
     addSection(value[0].container, key, value)
 }
-
-
 function addSection(containerWrapp, sectionType, items){
 
     var container = document.createElement('div')
@@ -255,6 +310,7 @@ function addSection(containerWrapp, sectionType, items){
     
         var iconDiv = document.createElement('div');
         iconDiv.classList.add('icon');
+        iconDiv.classList.add('enabled');
         iconDiv.onclick = function(e){ toggleCheck(iconDiv, e, item.name) }
 
         if(cookiesState && cookiesState[item.name] && cookiesState[item.name] === true){
@@ -285,11 +341,11 @@ function addSection(containerWrapp, sectionType, items){
         iconDiv.appendChild(checkmarkDiv);
     
         container.appendChild(iconDiv);
+        item['htmlEl'] = iconDiv
     });
+    
     containerWrapp.appendChild(container)
 }
-
- 
 function setCookie(name, value, days) {
     var expires = "";
     if (days) {
@@ -299,7 +355,6 @@ function setCookie(name, value, days) {
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
-
 function getCookie(name) {
     var nameEQ = name + "=";
     var cookies = document.cookie.split(';');
@@ -314,12 +369,9 @@ function getCookie(name) {
     }
     return null;
 }
-
-
 function saveAgendaState(){
     setCookie('new-world-artifact-agenda', JSON.stringify(cookiesState), 365);
 }
-
 function loadAgendaState(){
     const cookieStateInternal = getCookie('new-world-artifact-agenda')
     if (!cookieStateInternal) {
@@ -328,10 +380,46 @@ function loadAgendaState(){
 
     return JSON.parse(cookieStateInternal)
 }
+var seasonAllBtn = document.getElementById("seasonAll");
+var season3Btn = document.getElementById("season3");
+var season4Btn = document.getElementById("season4");
+var season5Btn = document.getElementById("season5");
 
+function toggleSeasonArtifacts(season) {
+    for (const [key,value] of Object.entries(structuredData)) {
+        value.forEach(item => {
+            if(item.season === season){
+                item['htmlEl'].classList.remove('disabled');
+                item['htmlEl'].classList.add('enabled');
+            } else {
+                item['htmlEl'].classList.remove('enabled');
+                item['htmlEl'].classList.add('disabled');
+            }
+            
+        });
+    }
+}
 
+seasonAllBtn.addEventListener("click", function() {
+    for (const [key,value] of Object.entries(structuredData)) {
+        value.forEach(item => {
+            item['htmlEl'].classList.remove('disabled');
+            item['htmlEl'].classList.add('enabled');
+        });
+    }
+});
 
+season3Btn.addEventListener("click", function() {
+    toggleSeasonArtifacts("S3")
+});
+
+season4Btn.addEventListener("click", function() {
+    toggleSeasonArtifacts("S4")
+});
+
+season5Btn.addEventListener("click", function() {
+    toggleSeasonArtifacts("S5")
+});
 </script>
-
 </body>
 </html>
