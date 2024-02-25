@@ -47,7 +47,7 @@
         position: relative;
         border: 2px solid transparent;
         border-radius: 5px;
-        background-image: url('item-bg.png');
+        background-image: url('https://www.nw-buddy.de/assets/icons/item/itemraritybgsquareartifact.png');
         background-size: cover; /* Optional: Cover the entire background */
         background-repeat: no-repeat;
     }
@@ -224,10 +224,16 @@ var cookiesState = loadAgendaState()
 function toggleCheck(element, e, name){
     e.preventDefault()
     element.classList.toggle('checked');
-    if(cookiesState && cookiesState[name] && cookiesState[name] === true) {
-        cookiesState[name] = false
-    }
-    saveAgendaState(cookiesState)
+    if(cookiesState){
+        if(cookiesState[name] ) {
+            cookiesState[name] = false
+            saveAgendaState(cookiesState)
+        } else {
+            cookiesState[name] = true
+            saveAgendaState(cookiesState)
+        }
+    } 
+    
 }
 
 for (const [key,value] of Object.entries(structuredData)) {
