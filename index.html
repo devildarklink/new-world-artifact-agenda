@@ -96,6 +96,10 @@
           display: none;
       }
 
+      .clickable {
+        cursor: pointer;
+      }
+
       .item-wrapper {
         display: flex;
         flex-direction: column;
@@ -411,9 +415,11 @@
           infoDropDetailText.classList.add('item-drop-detail-text');
           infoDropDetailText.innerHTML = item.obtainable
 
-          var a2 = document.createElement('a');          
-          a2.setAttribute('href', item.obtainableLink);
-          a2.setAttribute('target','_blank');
+          var a2 = document.createElement('div');
+          a2.classList.add('clickable')
+          a2.addEventListener('click', function() {
+            window.open(item.obtainableLink, '_blank');
+          });          
 
           var infoDropDetailIcon = document.createElement('span');
           infoDropDetailIcon.classList.add('material-symbols-outlined');
@@ -524,4 +530,4 @@
   });
   </script>
   </body>
-  </html>
+</html>
