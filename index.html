@@ -1,269 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New World Artifact Agenda</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <style>
-  
-      html {        
-          min-height: 100vh;
-      }
-  
-      body {
-          color: #fff;
-          width: 100%;
-          height:100%;
-          margin: 0;
-          padding: 0;
-          font-family: Arial, sans-serif;
-          background: linear-gradient(to top, #181919, #5e5d5d);
-          display: flex;
-      }
-  
-      .container-wrapper-1, .container-wrapper-2 {
-          margin: 0;
-          padding: 0;
-      }
-  
-      .container-header {
-          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-          font-size: 24px;
-          font-weight: bold;
-          color: #fff;
-      }
-  
-      .container {
-          display: grid;
-          grid-template-columns: repeat(4, 72px);
-          grid-auto-rows: auto;
-          margin-top: 10px;
-          margin-bottom: 10px;
-          grid-gap: 10px;
-      }
-  
-      .icon {
-          width: 100%;
-          display: inline-block;
-          position: relative;
-          border: 2px solid transparent;
-          border-radius: 5px;
-          background-image: url('https://www.nw-buddy.de/assets/icons/item/itemraritybgsquareartifact.png');
-          background-size: cover;
-          background-repeat: no-repeat;
-          flex-grow:1;
-      }
-  
-      .icon img {
-          border: 1px solid white;
-          width: 100%;
-          height: 100%;
-          cursor: pointer;
-          border-radius: 3px;
-      }
-  
-      .details {
-          display: none;
-          position: absolute;
-          top: calc(100% + 10px);
-          left: 0;
-          background-color: #222;
-          padding: 10px;
-          border: 1px solid #444;
-          border-radius: 5px;
-          z-index: 999;
-          
-      }
-  
-      .icon:hover .details {
-          display: block;
-      }
-  
-      .details img {
-          width: 100%;
-          height: auto;
-      }
-  
-      .overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 255, 0, 0.2);
-          border-radius: 5px;
-          display: none;
-      }
 
-      .clickable {
-        cursor: pointer;
-      }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New World Artifact Agenda</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        html {
+            min-height: 100vh;
+        }
 
-      .item-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        align-items: center;
-        justify-content: center;
-      }
-  
-      .icon.checked .overlay {
-          display: block;
-      }
-  
-      .icon.checked {
-          border-color: rgba(0, 255, 0, 0.5);
-      }
-  
-      .item-wrapper.enabled {
-          display: flex;
-      }
-  
-      .item-wrapper.disabled {
-          display: none;
-      }
-  
-      .checkmark {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 92px;
-          color: #fff;
-          display: none;
-      }
-  
-      .icon.checked .checkmark {
-          display: block;
-      }
-  
-      .bottom-footer {
-          display:flex;
-          flex-direction: column;
-          background-color: #333;
-          color: #fff;
-          text-align: center;
-          align-items: center;
-          justify-content: center;
-          height: 60px;
-          width:100%;
-      }
-  
-      button {
-          background: linear-gradient(to bottom, #777, #777);
-          color: #fff;
-          padding: 10px 20px; 
-          border: none; 
-          border-radius: 5px; 
-          font-size: 16px; 
-          cursor: pointer; 
-          transition: background-color 0.3s ease;
-          margin: 0 10px;
-      }
+        body {
+            color: #fff;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to top, #181919, #5e5d5d);
+            display: flex;
+        }
 
-      button.selected {
-        background: linear-gradient(to bottom, #000, #000);
-      }
-  
-      button:hover {
-        background: linear-gradient(to bottom, #000, #000);
-      }
-  
-      .sections {
-          display:flex;
-          flex-direction:row;
-          justify-content: center;
-          height:100%;
-      }
-  
-      .container-btn-header {
-          display:flex;
-          flex-direction:row;
-          justify-content:center;
-          margin:30px 0px;
-      }
-  
-      .body-container {
-          display:flex;
-          flex-direction:column;
-          width:100%;
-          min-height:100vh;
-      }
-  
-      .spacing {
-          margin: 0 120px;
-      }
+        .container-wrapper-1,
+        .container-wrapper-2 {
+            margin: 0;
+            padding: 0;
+        }
 
-      .info-item-drop-detail {
-        position: relative;
-        display: flex;
-      }
+        .container-header {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
 
-      .drop-detail-text {
-        cursor: pointer;
-        font-size: 18px;
-        color: white;
-        border: 1px solid white;
-        border-radius: 50%;
-        padding: 5px;
-      }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 72px);
+            grid-auto-rows: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            grid-gap: 10px;
+        }
 
-      .item-drop-detail-text {
-        visibility: hidden;
-        width: 200px;
-        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
-        color: #fff;
-        text-align: center;
-        border-radius: 8px;
-        padding: 8px;
-        font-size: 14px;
-        position: absolute;
-        z-index: 1;
-        bottom: 150%;
-        left: 50%;
-        margin-left: -100px; /* Half of width */
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
+        .icon {
+            width: 100%;
+            display: inline-block;
+            position: relative;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            background-image: url('https://www.nw-buddy.de/assets/icons/item/itemraritybgsquareartifact.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            flex-grow: 1;
+        }
 
-      .info-item-drop-detail:hover .item-drop-detail-text {
-        visibility: visible;
-        opacity: 1;
-      }
+        .icon img {
+            border: 1px solid white;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            border-radius: 3px;
+        }
 
-      a, a:hover, a:visited, a:active {
-        color: inherit;
-        text-decoration: none;
-      }
-  </style>
-  <script async="" src="https://nwdb.info/embed.js"></script>
-  </head>
-  <body>
-  <div class="body-container">
-      <div class="container-btn-header">
-          <button id="seasonAll" class="selected">All</button>
-          <button id="season3">S3</button>
-          <button id="season4">S4</button>
-          <button id="season5">S5</button>
-      </div>
-      <div class="sections">
-          <div class="container-wrapper-1 spacing"></div>         
-          <div class="container-wrapper-2 spacing"></div>    
-      </div>
-      <div class="bottom-footer">
-          <span>Disclaimer: Not responsive for mobile usage. Items that are not yet on live servers (PTR) may be updated.</span>
-          <span>Free to use/copy/change!</span>
-          <span>Credits for https://nwdb.info and https://www.nw-buddy.de</span>
-      </div>
-  </div>
-  <script>
-  var nwdbConfig = {
-      scale: 0.65,
-      delay: 10
-  }
-  // Your CSV data
-  var csvData = `name,type,image-src,link-href
+        .details {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background-color: #222;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            z-index: 999;
+
+        }
+
+        .icon:hover .details {
+            display: block;
+        }
+
+        .details img {
+            width: 100%;
+            height: auto;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 255, 0, 0.2);
+            border-radius: 5px;
+            display: none;
+        }
+
+        .clickable {
+            cursor: pointer;
+        }
+
+        .item-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon.checked .overlay {
+            display: block;
+        }
+
+        .icon.checked {
+            border-color: rgba(0, 255, 0, 0.5);
+        }
+
+        .item-wrapper.enabled {
+            display: flex;
+        }
+
+        .item-wrapper.disabled {
+            display: none;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 92px;
+            color: #fff;
+            display: none;
+        }
+
+        .icon.checked .checkmark {
+            display: block;
+        }
+
+        .bottom-footer {
+            display: flex;
+            flex-direction: column;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            width: 100%;
+        }
+
+        button {
+            background: linear-gradient(to bottom, #777, #777);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+        }
+
+        button.selected {
+            background: linear-gradient(to bottom, #000, #000);
+        }
+
+        button:hover {
+            background: linear-gradient(to bottom, #000, #000);
+        }
+
+        .sections {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .container-btn-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 30px 0px;
+        }
+
+        .container-btn-header-vertical {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            min-width: 20%;
+        }
+
+        .body-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .parent-container {
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .spacing {
+            margin: 0 120px;
+        }
+
+        .info-item-drop-detail {
+            position: relative;
+            display: flex;
+        }
+
+        .drop-detail-text {
+            cursor: pointer;
+            font-size: 18px;
+            color: white;
+            border: 1px solid white;
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .item-drop-detail-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Semi-transparent background */
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 14px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -100px;
+            /* Half of width */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .info-item-drop-detail:hover .item-drop-detail-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        a,
+        a:hover,
+        a:visited,
+        a:active {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab {
+            cursor: pointer;
+        }
+
+        .tabs {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .monsterType {
+            border: 5px solid black;
+            background-color: #777;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-right: 30px;
+        }
+
+        .card-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border: 2px solid black;
+            border-radius: 8px;
+            background-color: #373737;
+            padding: 10px;
+        }
+
+        .monsterTypeName {
+            display: flex;
+            flex-direction: column;
+        }
+        .monsterTypeDesc {
+            display: flex;
+            width: 100%;
+
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+
+        .optimal-choices {
+            margin: 20px 0;
+        }
+
+        .row-center{
+            display:flex;
+            flex-direction:row;
+            align-items: center;
+        }
+
+        .span24 {
+            font-size:24px;
+            font-weight:500;
+        }
+
+        .span36 {
+            font-size:36px;
+            font-weight:700;
+        }
+
+        .monsterList {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .sections-horizontal {
+            min-width: 65%;
+        }
+    </style>
+    <script async="" src="https://nwdb.info/embed.js"></script>
+</head>
+
+<body>
+    <div class="parent-container">
+        <div class="tabs">
+            <button class="tab active selected" data-tab="tab1">Dungeon Helper</button>
+            <button class="tab" data-tab="tab2">Artifact Tracking</button>
+        </div>
+        <div class="body-container tab-content" id="tab1">
+            <div class="container-btn-header">
+                <div class="container-btn-header-vertical">
+                    <button class="dgnBtns selected" id="1" class="selected">Amrine Excavation</button>
+                    <button class="dgnBtns" id="2">Starstone Barrows</button>
+                    <button class="dgnBtns" id="3">The Depths</button>
+                    <button class="dgnBtns" id="4">Dynasty Shipyard</button>
+                    <button class="dgnBtns" id="5">Lazarus Instrumentality</button>
+                    <button class="dgnBtns" id="6">Garden of Genesis</button>
+                    <button class="dgnBtns" id="7">Barnacles & Black Powder</button>
+                    <button class="dgnBtns" id="8">Tempest Heart</button>
+                    <button class="dgnBtns" id="9">Empyrean Forge</button>
+                    <button class="dgnBtns" id="10">Ennead</button>
+                    <button class="dgnBtns" id="11">Savage Divide</button>
+                    <button class="dgnBtns" id="12">Glacial Tarn</button>
+                </div>
+                <div class="sections-horizontal">
+                    <div class="dungeon-details">
+                        <div id="monsterList" class="monsterList">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="body-container tab-content" id="tab2">
+            <div class="container-btn-header">
+                <button id="seasonAll" class="selected">All</button>
+                <button id="season3">S3</button>
+                <button id="season4">S4</button>
+                <button id="season5">S5</button>
+            </div>
+            <div class="sections">
+                <div class="container-wrapper-1 spacing"></div>
+                <div class="container-wrapper-2 spacing"></div>
+            </div>
+            <div class="bottom-footer">
+                <span>Disclaimer: Not responsive for mobile usage. Items that are not yet on live servers (PTR) may be
+                    updated.</span>
+                <span>Free to use/copy/change!</span>
+                <span>Credits for https://nwdb.info and https://www.nw-buddy.de</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        var nwdbConfig = {
+            scale: 0.65,
+            delay: 10
+        }
+        // Your CSV data
+        var csvData = `name,type,image-src,link-href
   "1","S3","Headwear","Unyielding","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyhelmet3_head.png","https://nwdb.info/db/item/artifact_set1_heavyhead","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_heavyhead"
   "1","S3","Chestwear","Void Darkplate","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavychest6_chest.png","https://nwdb.info/db/item/artifact_set1_heavychest","Nereid at Barnacles & Black Powder - Mutation 1+","https://nwdb.info/db/creature/dryad_siren"
   "1","S3","Gloves","Magnetic Gauntlets","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms1_gloves.png","https://nwdb.info/db/item/artifact_set1_heavyhands","Isabella at Tempest's Heat - Mutation 1+","https://nwdb.info/db/creature/isabella_dg_shattermtn_phase2_00"
@@ -310,224 +446,364 @@
   "2","S5","2-Handed Weapons","Venom","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/2hspearseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_2hspear","Siren Queen Trial at the Spire of Melpomene","https://nwdb.info/db/zone/7004"
   "1","S5","Trinkets","Phoenix","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/ancientamulet13.png","https://ptr.nwdb.info/db/item/artifact_set2_amulet1","Season 5 Pass Reward at Free Track Lvl 80","https://ptr.nwdb.info/db/item/artifact_set2_amulet1"
   `;
-  var lines = csvData.trim().split('\n');
-  var header = lines.shift();
-  var containerWrapper1 = document.querySelector('.container-wrapper-1');
-  var containerWrapper2 = document.querySelector('.container-wrapper-2');
-  var structuredData = {};
-  for(let i = 0; i != lines.length; i++){
-      let line = lines[i]
-      var columns = line.split(',');
-      var panel = columns[0].replace(/\"/g, '').replace(/\s/g, "");; 
-      var season = columns[1].replace(/\"/g, ''); 
-      var type = columns[2].replace(/\"/g, ''); 
-      var name = columns[3].replace(/\"/g, ''); 
-      var imageSrc = columns[4].replace(/\"/g, ''); 
-      var linkHref = columns[5].replace(/\"/g, '');
-      var obtainable = columns[6].replace(/\"/g, '');
-      var obtainableLink = columns[7].replace(/\"/g, '');
-      if(!structuredData[type]){
-          structuredData[type] = []
-      }
-      structuredData[type].push(
-          {
-              container : panel === "1" ? containerWrapper1 : containerWrapper2,
-              season,
-              name,
-              imageSrc,
-              linkHref,
-              obtainable,
-              obtainableLink
-          }
-      );
-  }
-  var cookiesState = loadAgendaState()
-  function toggleCheck(element, e, name){
-      e.preventDefault()
-      element.classList.toggle('checked');
-      if(cookiesState){
-          if(cookiesState[name] ) {
-              cookiesState[name] = false
-              saveAgendaState(cookiesState)
-          } else {
-              cookiesState[name] = true
-              saveAgendaState(cookiesState)
-          }
-      } 
-      
-  }
-  for (const [key,value] of Object.entries(structuredData)) {
-      var header = document.createElement('span')
-      header.classList.add('container-header')
-      header.innerText = key    
-      value[0].container.appendChild(header)
-      
-      addSection(value[0].container, key, value)
-  }
-  function addSection(containerWrapp, sectionType, items){
-  
-      var container = document.createElement('div')
-      container.classList.add('container')  
-  
-      items.forEach(function(item) {
-      
-          var itemWrapper = document.createElement('div')
-          itemWrapper.classList.add('item-wrapper');
+        var lines = csvData.trim().split('\n');
+        var header = lines.shift();
+        var containerWrapper1 = document.querySelector('.container-wrapper-1');
+        var containerWrapper2 = document.querySelector('.container-wrapper-2');
+        var structuredData = {};
+        for (let i = 0; i != lines.length; i++) {
+            let line = lines[i]
+            var columns = line.split(',');
+            var panel = columns[0].replace(/\"/g, '').replace(/\s/g, "");;
+            var season = columns[1].replace(/\"/g, '');
+            var type = columns[2].replace(/\"/g, '');
+            var name = columns[3].replace(/\"/g, '');
+            var imageSrc = columns[4].replace(/\"/g, '');
+            var linkHref = columns[5].replace(/\"/g, '');
+            var obtainable = columns[6].replace(/\"/g, '');
+            var obtainableLink = columns[7].replace(/\"/g, '');
+            if (!structuredData[type]) {
+                structuredData[type] = []
+            }
+            structuredData[type].push(
+                {
+                    container: panel === "1" ? containerWrapper1 : containerWrapper2,
+                    season,
+                    name,
+                    imageSrc,
+                    linkHref,
+                    obtainable,
+                    obtainableLink
+                }
+            );
+        }
+        var cookiesState = loadAgendaState()
+        function toggleCheck(element, e, name) {
+            e.preventDefault()
+            element.classList.toggle('checked');
+            if (cookiesState) {
+                if (cookiesState[name]) {
+                    cookiesState[name] = false
+                    saveAgendaState(cookiesState)
+                } else {
+                    cookiesState[name] = true
+                    saveAgendaState(cookiesState)
+                }
+            }
 
-          var iconDiv = document.createElement('div');
-          iconDiv.classList.add('icon');
-          iconDiv.classList.add('enabled');
-          iconDiv.onclick = function(e){ toggleCheck(iconDiv, e, item.name) }
-  
-          if(cookiesState && cookiesState[item.name] && cookiesState[item.name] === true){
-              iconDiv.classList.toggle('checked');
-          }        
-  
-          var a = document.createElement('a');
-          a.setAttribute('href', item.linkHref);
-  
-          var img = document.createElement('img');
-          img.setAttribute('src', item.imageSrc);    
-          img.setAttribute('width', "32")
-          img.setAttribute('height', "32")
-          img.setAttribute('alt', 'Item Image');
-  
-          a.appendChild(img)
-  
-          var overlayDiv = document.createElement('div');
-          overlayDiv.classList.add('overlay');
-  
-          var checkmarkDiv = document.createElement('div');
-          checkmarkDiv.classList.add('checkmark');
-          checkmarkDiv.innerHTML = '&#10003;';
-  
-          // Append elements
-          iconDiv.appendChild(a);
-          iconDiv.appendChild(overlayDiv);
-          iconDiv.appendChild(checkmarkDiv);
-      
-          itemWrapper.appendChild(iconDiv);
+        }
+        for (const [key, value] of Object.entries(structuredData)) {
+            var header = document.createElement('span')
+            header.classList.add('container-header')
+            header.innerText = key
+            value[0].container.appendChild(header)
 
-          var infoDropDetail = document.createElement('div');
-          infoDropDetail.classList.add('info-item-drop-detail');
+            addSection(value[0].container, key, value)
+        }
+        function addSection(containerWrapp, sectionType, items) {
 
-          var infoDropDetailText = document.createElement('span');
-          infoDropDetailText.classList.add('item-drop-detail-text');
-          infoDropDetailText.innerHTML = item.obtainable
+            var container = document.createElement('div')
+            container.classList.add('container')
 
-          var a2 = document.createElement('div');
-          a2.classList.add('clickable')
-          a2.addEventListener('click', function() {
-            window.open(item.obtainableLink, '_blank');
-          });          
+            items.forEach(function (item) {
 
-          var infoDropDetailIcon = document.createElement('span');
-          infoDropDetailIcon.classList.add('material-symbols-outlined');
-          infoDropDetailIcon.innerText = "info"
-          a2.appendChild(infoDropDetailIcon)
+                var itemWrapper = document.createElement('div')
+                itemWrapper.classList.add('item-wrapper');
 
-          infoDropDetail.appendChild(infoDropDetailText)
-          infoDropDetail.appendChild(a2)
+                var iconDiv = document.createElement('div');
+                iconDiv.classList.add('icon');
+                iconDiv.classList.add('enabled');
+                iconDiv.onclick = function (e) { toggleCheck(iconDiv, e, item.name) }
 
-          itemWrapper.appendChild(infoDropDetail);
+                if (cookiesState && cookiesState[item.name] && cookiesState[item.name] === true) {
+                    iconDiv.classList.toggle('checked');
+                }
 
-          container.appendChild(itemWrapper);
+                var a = document.createElement('a');
+                a.setAttribute('href', item.linkHref);
 
-          item['htmlEl'] = itemWrapper
-      });
-      
-      containerWrapp.appendChild(container)
-  }
-  function setCookie(name, value, days) {
-      var expires = "";
-      if (days) {
-          var date = new Date();
-          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-          expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-  }
-  function getCookie(name) {
-      var nameEQ = name + "=";
-      var cookies = document.cookie.split(';');
-      for(var i = 0; i < cookies.length; i++) {
-          var cookie = cookies[i];
-          while (cookie.charAt(0) == ' ') {
-          cookie = cookie.substring(1, cookie.length);
-          }
-          if (cookie.indexOf(nameEQ) == 0) {
-          return cookie.substring(nameEQ.length, cookie.length);
-          }
-      }
-      return null;
-  }
-  function saveAgendaState(){
-      setCookie('new-world-artifact-agenda', JSON.stringify(cookiesState), 365);
-  }
-  function loadAgendaState(){
-      const cookieStateInternal = getCookie('new-world-artifact-agenda')
-      if (!cookieStateInternal) {
-          return {}
-      }
-  
-      return JSON.parse(cookieStateInternal)
-  }
-  var seasonAllBtn = document.getElementById("seasonAll");
-  var season3Btn = document.getElementById("season3");
-  var season4Btn = document.getElementById("season4");
-  var season5Btn = document.getElementById("season5");
-  
-  function toggleSeasonArtifacts(season) {
-      for (const [key,value] of Object.entries(structuredData)) {
-          value.forEach(item => {
-              if(item.season === season){
-                  item['htmlEl'].classList.remove('disabled');
-                  item['htmlEl'].classList.add('enabled');
-              } else {
-                  item['htmlEl'].classList.remove('enabled');
-                  item['htmlEl'].classList.add('disabled');
-              }
-              
-          });
-      }
-  }
-  
-  seasonAllBtn.addEventListener("click", function() {
-    season3Btn.classList.remove('selected')
-    season4Btn.classList.remove('selected')
-    season5Btn.classList.remove('selected')
-    for (const [key,value] of Object.entries(structuredData)) {
-        value.forEach(item => {
-            item['htmlEl'].classList.remove('disabled');
-            item['htmlEl'].classList.add('enabled');
+                var img = document.createElement('img');
+                img.setAttribute('src', item.imageSrc);
+                img.setAttribute('width', "32")
+                img.setAttribute('height', "32")
+                img.setAttribute('alt', 'Item Image');
+
+                a.appendChild(img)
+
+                var overlayDiv = document.createElement('div');
+                overlayDiv.classList.add('overlay');
+
+                var checkmarkDiv = document.createElement('div');
+                checkmarkDiv.classList.add('checkmark');
+                checkmarkDiv.innerHTML = '&#10003;';
+
+                // Append elements
+                iconDiv.appendChild(a);
+                iconDiv.appendChild(overlayDiv);
+                iconDiv.appendChild(checkmarkDiv);
+
+                itemWrapper.appendChild(iconDiv);
+
+                var infoDropDetail = document.createElement('div');
+                infoDropDetail.classList.add('info-item-drop-detail');
+
+                var infoDropDetailText = document.createElement('span');
+                infoDropDetailText.classList.add('item-drop-detail-text');
+                infoDropDetailText.innerHTML = item.obtainable
+
+                var a2 = document.createElement('div');
+                a2.classList.add('clickable')
+                a2.addEventListener('click', function () {
+                    window.open(item.obtainableLink, '_blank');
+                });
+
+                var infoDropDetailIcon = document.createElement('span');
+                infoDropDetailIcon.classList.add('material-symbols-outlined');
+                infoDropDetailIcon.innerText = "info"
+                a2.appendChild(infoDropDetailIcon)
+
+                infoDropDetail.appendChild(infoDropDetailText)
+                infoDropDetail.appendChild(a2)
+
+                itemWrapper.appendChild(infoDropDetail);
+
+                container.appendChild(itemWrapper);
+
+                item['htmlEl'] = itemWrapper
+            });
+
+            containerWrapp.appendChild(container)
+        }
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                while (cookie.charAt(0) == ' ') {
+                    cookie = cookie.substring(1, cookie.length);
+                }
+                if (cookie.indexOf(nameEQ) == 0) {
+                    return cookie.substring(nameEQ.length, cookie.length);
+                }
+            }
+            return null;
+        }
+        function saveAgendaState() {
+            setCookie('new-world-artifact-agenda', JSON.stringify(cookiesState), 365);
+        }
+        function loadAgendaState() {
+            const cookieStateInternal = getCookie('new-world-artifact-agenda')
+            if (!cookieStateInternal) {
+                return {}
+            }
+
+            return JSON.parse(cookieStateInternal)
+        }
+        var seasonAllBtn = document.getElementById("seasonAll");
+        var season3Btn = document.getElementById("season3");
+        var season4Btn = document.getElementById("season4");
+        var season5Btn = document.getElementById("season5");
+
+        function toggleSeasonArtifacts(season) {
+            for (const [key, value] of Object.entries(structuredData)) {
+                value.forEach(item => {
+                    if (item.season === season) {
+                        item['htmlEl'].classList.remove('disabled');
+                        item['htmlEl'].classList.add('enabled');
+                    } else {
+                        item['htmlEl'].classList.remove('enabled');
+                        item['htmlEl'].classList.add('disabled');
+                    }
+
+                });
+            }
+        }
+
+        seasonAllBtn.addEventListener("click", function () {
+            season3Btn.classList.remove('selected')
+            season4Btn.classList.remove('selected')
+            season5Btn.classList.remove('selected')
+            for (const [key, value] of Object.entries(structuredData)) {
+                value.forEach(item => {
+                    item['htmlEl'].classList.remove('disabled');
+                    item['htmlEl'].classList.add('enabled');
+                });
+            }
+            seasonAllBtn.classList.add('selected')
         });
-    }
-    seasonAllBtn.classList.add('selected')
-  });
-  
-  season3Btn.addEventListener("click", function() {
-    seasonAll.classList.remove('selected')
-    season4Btn.classList.remove('selected')
-    season5Btn.classList.remove('selected')
-    toggleSeasonArtifacts("S3")
-    season3Btn.classList.add('selected')
-  });
-  
-  season4Btn.addEventListener("click", function() {
-    seasonAll.classList.remove('selected')
-    season3Btn.classList.remove('selected')
-    season5Btn.classList.remove('selected')
-    toggleSeasonArtifacts("S4")
-    season4Btn.classList.add('selected')
-  });
-  
-  season5Btn.addEventListener("click", function() {
-    seasonAll.classList.remove('selected')
-    season3Btn.classList.remove('selected')
-    season4Btn.classList.remove('selected')
-    toggleSeasonArtifacts("S5")
-    season5Btn.classList.add('selected')
-  });
-  </script>
-  </body>
+
+        season3Btn.addEventListener("click", function () {
+            seasonAll.classList.remove('selected')
+            season4Btn.classList.remove('selected')
+            season5Btn.classList.remove('selected')
+            toggleSeasonArtifacts("S3")
+            season3Btn.classList.add('selected')
+        });
+
+        season4Btn.addEventListener("click", function () {
+            seasonAll.classList.remove('selected')
+            season3Btn.classList.remove('selected')
+            season5Btn.classList.remove('selected')
+            toggleSeasonArtifacts("S4")
+            season4Btn.classList.add('selected')
+        });
+
+        season5Btn.addEventListener("click", function () {
+            seasonAll.classList.remove('selected')
+            season3Btn.classList.remove('selected')
+            season4Btn.classList.remove('selected')
+            toggleSeasonArtifacts("S5")
+            season5Btn.classList.add('selected')
+        });
+
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {            
+            tab.addEventListener('click', (e) => {
+                const tabId = tab.getAttribute('data-tab');
+                activateTab(tabId);
+            });
+        });
+
+        function activateTab(tabId) {
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.classList.remove('selected');
+            });
+
+            tabContents.forEach(tabContent => {
+                tabContent.classList.remove('active');
+            });
+
+            const activeTab = document.querySelector(`[data-tab="${tabId}"]`);
+
+            const activeTabContent = document.getElementById(tabId);
+            activeTab.classList.add('selected')
+            activeTab.classList.add('active');
+            activeTabContent.classList.add('active');
+
+        }
+
+        function makeRequest(id) {
+            
+            const monsterList = document.getElementById('monsterList')
+            monsterList.innerHTML = ""
+            fetch('https://services-nwapi.alwaysdata.net:8400/api?id=' + id)
+                .then(response => response.json())
+                .then(jsonData => {
+                    let data = jsonData.monsterList;
+                    for(let i = 0; i != data.length; i++){
+
+                        let monsterType = document.createElement('div');
+                        monsterType.classList.add('monsterType');
+
+                        let monsterDesc = document.createElement('div');
+                        monsterDesc.classList.add('row-center');
+                        monsterDesc.classList.add('card-header');
+
+                        let imgMonsterType = document.createElement('img');
+                        imgMonsterType.classList.add('row-center');
+                        imgMonsterType.setAttribute('width', "64");
+                        imgMonsterType.setAttribute('height', "64");
+                        imgMonsterType.setAttribute('src', "static/"+data[i].name+".png");
+
+                        let imgMonsterTypeSpan = document.createElement('span');
+                        imgMonsterTypeSpan.classList.add('span36');
+                        imgMonsterTypeSpan.innerText = `${data[i].percentage}%  ${data[i].name}`
+                        
+                        monsterDesc.appendChild(imgMonsterType);
+                        monsterDesc.appendChild(imgMonsterTypeSpan);
+                        monsterType.appendChild(monsterDesc);
+
+                        let choicesList = document.createElement('div');
+                        choicesList.classList.add('choicesList')
+
+                        let span = document.createElement('span');
+                        span.innerText = "Suggested Choices for DPS";
+                        choicesList.appendChild(span);
+
+                        let optimalChoices = document.createElement('div');
+                        optimalChoices.classList.add('optimal-choices');
+                        let damagesAdded = {}
+                        for(let j = 0; j != data[i].choiceList.length; j++){
+                            if(!damagesAdded[data[i].choiceList[j].type]){
+                                let choice = document.createElement('div');
+                                choice.classList.add('row-center');
+
+                                let img = document.createElement('img');
+                                img.setAttribute('width', "32");
+                                img.setAttribute('height', "32");
+                                img.setAttribute('src', "static/"+ data[i].choiceList[j].type+".webp");
+
+                                let spanImg = document.createElement('span');
+                                spanImg.classList.add('span24');
+                                spanImg.innerText = `${data[i].choiceList[j].type} damage - ${data[i].choiceList[j].percentage} %`;
+                                damagesAdded[data[i].choiceList[j].type] = true;
+
+                                
+                                choice.appendChild(img);
+                                choice.appendChild(spanImg);
+                                optimalChoices.appendChild(choice);
+                            }
+                        }
+
+                        choicesList.appendChild(optimalChoices)
+                        let weaponSugg = document.createElement('div');
+                        weaponSugg.classList.add('span36');
+                        weaponSugg.innerText = 'Weapon Suggestions'
+                        choicesList.appendChild(weaponSugg);
+
+                        for(let j = 0; j != data[i].choiceList.length; j++){
+                            let weaponSingleSuggestion = document.createElement('div');
+                            weaponSingleSuggestion.classList.add('row-center');
+
+                            let img = document.createElement('img');
+                            img.setAttribute('width', "64");
+                            img.setAttribute('height', "64");
+                            img.setAttribute('src', "static/"+data[i].choiceList[j].name+".png");
+
+                            let spanImg = document.createElement('span');
+                            spanImg.classList.add('span24');
+                            spanImg.innerText = `${data[i].choiceList[j].name} (${data[i].choiceList[j].type})`;
+                            
+                            weaponSingleSuggestion.appendChild(img);
+                            weaponSingleSuggestion.appendChild(spanImg);
+                            choicesList.appendChild(weaponSingleSuggestion);
+                        }
+                        monsterType.appendChild(choicesList);
+                        monsterList.appendChild(monsterType);
+                    }                    
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        
+        document.querySelectorAll('.dgnBtns').forEach(btnDg => {
+            btnDg.addEventListener("click", function () {
+                document.querySelectorAll('.dgnBtns').forEach((btn)=> {
+                    btn.classList.remove('selected')
+                });
+
+                btnDg.classList.add('selected')                
+                makeRequest(btnDg.getAttribute('id'))
+            });
+        })
+
+        activateTab('tab1');
+        makeRequest(1);
+    </script>
+</body>
+
 </html>
