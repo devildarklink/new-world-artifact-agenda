@@ -321,6 +321,12 @@
             align-items: center;
         }
 
+        .row-evenly{
+            display:flex;
+            flex-direction:row;
+            justify-content: space-evenly;
+        }
+
         .span24 {
             font-size:24px;
             font-weight:500;
@@ -345,6 +351,36 @@
         .dgnBtns {
             margin-top: 5px; 
         }
+        .mutation-selector {
+            position: relative;
+            height: 80px;
+            width: 210px;
+            align-self: center;
+            margin: 10px 10px;
+        }
+
+        .mut-active {
+            border: 2px solid white;
+            border-radius: 3px;        
+        }
+
+        .overlay-mut {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: white;
+        }
+
+        .mutation-selector:hover .overlay-mut {
+            opacity: 0.5;
+        }
+
     </style>
     <script async="" src="https://nwdb.info/embed.js"></script>
 </head>
@@ -358,18 +394,45 @@
         <div class="body-container tab-content" id="tab1">
             <div class="container-btn-header">
                 <div class="container-btn-header-vertical">
-                    <button class="dgnBtns selected" id="1" class="selected">Amrine Excavation</button>
-                    <button class="dgnBtns" id="2">Starstone Barrows</button>
-                    <button class="dgnBtns" id="3">The Depths</button>
-                    <button class="dgnBtns" id="4">Dynasty Shipyard</button>
-                    <button class="dgnBtns" id="5">Lazarus Instrumentality</button>
-                    <button class="dgnBtns" id="6">Garden of Genesis</button>
-                    <button class="dgnBtns" id="7">Barnacles & Black Powder</button>
-                    <button class="dgnBtns" id="8">Tempest Heart</button>
-                    <button class="dgnBtns" id="9">Empyrean Forge</button>
-                    <button class="dgnBtns" id="10">Ennead</button>
-                    <button class="dgnBtns" id="11">Savage Divide</button>
-                    <button class="dgnBtns" id="12">Glacial Tarn</button>
+                    <div class="container-btn-header-vertical">
+                        <button class="dgnBtns selected" id="1" class="selected">Amrine Excavation</button>
+                        <button class="dgnBtns" id="2">Starstone Barrows</button>
+                        <button class="dgnBtns" id="3">The Depths</button>
+                        <button class="dgnBtns" id="4">Dynasty Shipyard</button>
+                        <button class="dgnBtns" id="5">Lazarus Instrumentality</button>
+                        <button class="dgnBtns" id="6">Garden of Genesis</button>
+                        <button class="dgnBtns" id="7">Barnacles & Black Powder</button>
+                        <button class="dgnBtns" id="8">Tempest Heart</button>
+                        <button class="dgnBtns" id="9">Empyrean Forge</button>
+                        <button class="dgnBtns" id="10">Ennead</button>
+                        <button class="dgnBtns" id="11">Savage Divide</button>
+                        <button class="dgnBtns" id="12">Glacial Tarn</button>
+                    </div>
+                    <div class="container-btn-header-vertical">
+                        
+                            <div class="mutation-selector mut-active" mut-selector="Eternal">
+                                <img width="210" height="80" src="Eternal.png">
+                                <div class="overlay-mut">
+                                </div>
+                            </div>
+                            <div class="mutation-selector" mut-selector="Hellfire">
+                                <img width="210" height="80" src="Hellfire.png">
+                                <div class="overlay-mut">
+                                </div>
+                            </div>
+                        
+                            <div class="mutation-selector" mut-selector="Icebound">
+                                <img width="210" height="80" src="Icebound.png">
+                                <div class="overlay-mut">
+                                </div>
+                            </div>
+                            <div class="mutation-selector" mut-selector="Overgrown">
+                                <img width="210" height="80" src="Overgrown.png">
+                                <div class="overlay-mut">
+                                </div>
+                            </div>
+                        
+                    </div>
                 </div>
                 <div class="sections-horizontal">
                     <div class="dungeon-details">
@@ -680,6 +743,32 @@
             });
         });
 
+        let mutationGems = {
+            "Hellfire": "Ruby",
+            "Icebound": "Aquamarine",
+            "Overgrown": "Amber",
+            "Eternal": "Amethyst"
+        }
+        let mutationGemSelected = "Eternal"
+
+        let allMutationSelector = document.querySelectorAll('.mutation-selector');
+        allMutationSelector.forEach((el) => {
+            el.addEventListener('click', () => {
+                allMutationSelector.forEach(el2 => {
+                    el2.classList.remove('mut-active')
+                });
+                el.classList.add('mut-active');
+                mutationGemSelected = el.getAttribute('mut-selector');
+
+                document.querySelectorAll('.choicesList').forEach(choice => {
+                    let gemSug = choice.querySelector('.gem-armor');
+                    if(gemSug)
+                        choice.removeChild(gemSug)
+                    choice.appendChild(getGemSuggestion())
+                });                
+            });    
+        });
+
         function activateTab(tabId) {
             tabs.forEach(tab => {
                 tab.classList.remove('active');
@@ -697,6 +786,23 @@
             activeTab.classList.add('active');
             activeTabContent.classList.add('active');
 
+        }
+        function getGemSuggestion(){
+            let gemsSingleSuggestion = document.createElement('div');
+            gemsSingleSuggestion.classList.add('row-center');
+            gemsSingleSuggestion.classList.add('gem-armor')
+            let img = document.createElement('img');
+            img.setAttribute('width', "96");
+            img.setAttribute('height', "64");
+            img.setAttribute('src', "static/"+mutationGems[mutationGemSelected]+".png");
+
+            let spanImg = document.createElement('span');
+            spanImg.classList.add('span24');
+            spanImg.innerText = `${mutationGems[mutationGemSelected]}`;
+            
+            gemsSingleSuggestion.appendChild(img);
+            gemsSingleSuggestion.appendChild(spanImg);
+            return gemsSingleSuggestion
         }
 
         function makeRequest(id) {
@@ -812,6 +918,14 @@
                                 choicesList.appendChild(gemsSingleSuggestion);
                             }                           
                         }
+
+                        let mutSel = document.createElement('div');
+                        mutSel.classList.add('span36');
+                        mutSel.innerText = 'Gems Suggestions (Armor)'
+                        choicesList.appendChild(mutSel);
+
+                        let gemsSingleSuggestion = getGemSuggestion()
+                        choicesList.appendChild(gemsSingleSuggestion);
                         
                         monsterType.appendChild(choicesList);
                         monsterList.appendChild(monsterType);
