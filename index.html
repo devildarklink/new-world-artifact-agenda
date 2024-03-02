@@ -719,7 +719,7 @@
 
                         let imgMonsterTypeSpan = document.createElement('span');
                         imgMonsterTypeSpan.classList.add('span36');
-                        imgMonsterTypeSpan.innerText = `${data[i].percentage}%  ${data[i].name}`
+                        imgMonsterTypeSpan.innerText = `${data[i].percentage} %  ${data[i].name}`
                         
                         monsterDesc.appendChild(imgMonsterType);
                         monsterDesc.appendChild(imgMonsterTypeSpan);
@@ -768,7 +768,7 @@
                             weaponSingleSuggestion.classList.add('row-center');
 
                             let img = document.createElement('img');
-                            img.setAttribute('width', "64");
+                            img.setAttribute('width', "96");
                             img.setAttribute('height', "64");
                             img.setAttribute('src', "static/"+data[i].choiceList[j].name+".png");
 
@@ -780,6 +780,34 @@
                             weaponSingleSuggestion.appendChild(spanImg);
                             choicesList.appendChild(weaponSingleSuggestion);
                         }
+
+
+                        if(data[i].attackGems.length){
+                            
+                            let gemsSugg = document.createElement('div');
+                            gemsSugg.classList.add('span36');
+                            gemsSugg.innerText = 'Gems Suggestions (Weapons)'
+                            choicesList.appendChild(gemsSugg);
+                            
+                            for(let g = 0; g != data[i].attackGems.length; g++){
+                                let gemsSingleSuggestion = document.createElement('div');
+                                gemsSingleSuggestion.classList.add('row-center');
+
+                                let img = document.createElement('img');
+                                img.setAttribute('width', "96");
+                                img.setAttribute('height', "64");
+                                img.setAttribute('src', "static/"+data[i].attackGems[g].name+".png");
+
+                                let spanImg = document.createElement('span');
+                                spanImg.classList.add('span24');
+                                spanImg.innerText = `${data[i].attackGems[g].name} ${data[i].attackGems[g].percentage} %`;
+                                
+                                gemsSingleSuggestion.appendChild(img);
+                                gemsSingleSuggestion.appendChild(spanImg);
+                                choicesList.appendChild(gemsSingleSuggestion);
+                            }                           
+                        }
+                        
                         monsterType.appendChild(choicesList);
                         monsterList.appendChild(monsterType);
                     }                    
