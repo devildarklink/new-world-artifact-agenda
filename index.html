@@ -698,7 +698,7 @@
             
             const monsterList = document.getElementById('monsterList')
             monsterList.innerHTML = ""
-            fetch('services-nwapi.alwaysdata.net:8400/api?id=' + id)
+            fetch('http://services-nwapi.alwaysdata.net:8400/api?id=' + id)
                 .then(response => response.json())
                 .then(jsonData => {
                     let data = jsonData.monsterList;
