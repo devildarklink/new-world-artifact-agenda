@@ -448,6 +448,7 @@
                 <button id="season3">S3</button>
                 <button id="season4">S4</button>
                 <button id="season5">S5</button>
+                <button id="season6">S6</button>
             </div>
             <div class="sections">
                 <div class="container-wrapper-1 spacing"></div>
@@ -468,51 +469,59 @@
         }
         // Your CSV data
         var csvData = `name,type,image-src,link-href
-  "1","S3","Headwear","Unyielding","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyhelmet3_head.png","https://nwdb.info/db/item/artifact_set1_heavyhead","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_heavyhead"
-  "1","S3","Chestwear","Void Darkplate","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavychest6_chest.png","https://nwdb.info/db/item/artifact_set1_heavychest","Nereid at Barnacles & Black Powder - Mutation 1+","https://nwdb.info/db/creature/dryad_siren"
-  "1","S3","Gloves","Magnetic Gauntlets","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms1_gloves.png","https://nwdb.info/db/item/artifact_set1_heavyhands","Isabella at Tempest's Heat - Mutation 1+","https://nwdb.info/db/creature/isabella_dg_shattermtn_phase2_00"
-  "1","S3","Legwear","Freedom","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumthighs3_legs.png","https://nwdb.info/db/item/artifact_set1_heavylegs","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_heavylegs"
-  "1","S4","Footwear","The Unmoved","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavycalves2_feet.png","https://nwdb.info/db/item/artifact_set1_heavyfeet","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_heavyfeet"
-  "1","S3","Headwear","Djinn Headwrap","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_harbingermediumsmile_head.png","https://nwdb.info/db/item/artifact_set1_mediumhead","Gathered from Elite Beast Hoard","https://nwdb.info/db/item/artifact_set1_mediumhead"
-  "1","S3","Chestwear","Nimble Coat","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_wraithhunterlightnailst3_chest.png","https://nwdb.info/db/item/artifact_set1_mediumchest","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_mediumchest"
-  "1","S3","Gloves","Ghoul Gloves","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms2_gloves.png","https://nwdb.info/db/item/artifact_set1_mediumhands","Overgrown Guardian or Adiana's Chosen Beast at Elysian Wilds","https://nwdb.info/db/creature/fl_dryad_beast_named_09fl03"
-  "1","S3","Legwear","Attuned Leather Pants","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumthighs1_legs.png","https://nwdb.info/db/item/artifact_set1_mediumlegs","Quest Reward - The End of New Eden","https://nwdb.info/db/quest/09a_m15_fightartemis"
-  "1","S4","Footwear","Winged Leather Shoes","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumcalves1_feet.png","https://nwdb.info/db/item/artifact_set1_mediumfeet","Season 4 Pass Reward at Free Track Lvl 20","https://nwdb.info/db/item/artifact_set1_mediumfeet"
-  "1","S3","Headwear","Grey Wizard's Hat","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/cloth_setb_hat_t4.png","https://nwdb.info/db/item/artifact_set1_lighthead","Corrupted Major Breach Lv. 65 at Brimstone Sands/Shattered Mountain/Reekwater","https://nwdb.info/db/item/artifact_set1_lighthead"
-  "1","S3","Chestwear","Featherweight","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarylightchest2_chest.png","https://nwdb.info/db/item/artifact_set1_lightchest","Ner' Mur at Elysian Wilds","https://nwdb.info/db/creature/fl_hercyne_corvid_named_09fl10"
-  "1","S4","Gloves","Quickdraw Gloves","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_nagacorruptedmedium_hands.png","https://nwdb.info/db/item/artifact_set1_lighthands","Season 4 Pass Reward at Free Track Lvl 100","https://nwdb.info/db/item/artifact_set1_lighthands"
-  "1","S4","Legwear","Koya's Knee Guards","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_nagacorruptedmedium_legs.png","https://nwdb.info/db/item/artifact_set1_lightlegs","Outpost Rush Cache Lv 61 - 65","https://nwdb.info/db/item/artifact_set1_lightlegs"
-  "1","S3","Footwear","Tumbler Feetwraps","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_hexencirce_feet.png","https://nwdb.info/db/item/artifact_set1_lightfeet","Season 3 Pass Reward at Free Track Lvl 20","https://nwdb.info/db/item/artifact_set1_lightfeet"
-  "2","S3","1-Handed Weapons","The Butcher","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hswords3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hlongsword","Zhou Taiying at Dynasty Shipyard - Mutation 1+","https://nwdb.info/db/creature/dynasty_empress"
-  "2","S3","1-Handed Weapons","Freya's Francisca","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hhatchets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hthrowingaxe","The Blighted Greenskeeper at Garden of Genesis - Mutation 1+","https://nwdb.info/db/creature/naga_angryearth"
-  "2","S3","2-Handed Weapons","Spark of Mjölnir","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hwarhammers3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hwarhammer","Chardis at Lazarus Instrumentality - Mutation 1+","https://nwdb.info/db/creature/torso_boss"
-  "2","S3","2-Handed Weapons","The Abyss","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hgreataxes3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hgreataxe","Corrupted Major Breach Lv. 65 at Brimstone Sands/Shattered Mountain/Reekwater","https://nwdb.info/db/item/artifact_set1_2hgreataxe"
-  "2","S4","2-Handed Weapons","Boltcaster","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hbows3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hbow","Annoyed Aguascia at Elysian Wilds","https://nwdb.info/db/creature/fl_gorilla_ice_elite_named_09fl12"
-  "2","S3","2-Handed Weapons","The Mechanic","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hmuskets3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hmusket","Toy Maker Phthah at Elysian Wilds","https://nwdb.info/db/creature/fl_ancientguardian_mage_named_elite_09fl06"
-  "2","S4","Shields","Gladiator","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hroundshields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hroundshield","Tribunal Ice Mammoth at Elysian Wilds","https://nwdb.info/db/creature/fl_mammoth_ice_elite_09fl01"
-  "2","S3","Shields","Michael","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hkiteshields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hkiteshield","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_1hkiteshield"
-  "2","S3","Shields","The Wall","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1htowershields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1htowershield","Heru at The Ennead - Mutation 1+","https://nwdb.info/db/creature/anubianguardian_horus_boss"
-  "2","S3","Magical Weapons","Inferno","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hfirestaffs3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hstafffire","Commander Marius at Empyrean Forge - Mutation 1+","https://nwdb.info/db/creature/evil_knight_fire_champion_dg_greatcleave_01"
-  "2","S4","Magical Weapons","Vengeance","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hlifestaffs3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hstafflife","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_2hstafflife"
-  "2","S3","2-Handed Weapons","Scorpion's Sting","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hspears3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hspear","Scorpio Supernal at Brimstone Sands","https://nwdb.info/db/creature/desert_scorpion_named_04"
-  "2","S3","1-Handed Weapons","Finisher","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hrapiers3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hrapier","Montrapala the Unruled at Elysian Wilds","https://nwdb.info/db/creature/fl_mammoth_named_elite_09fl12"
-  "2","S4","Magical Weapons","Deep Freeze","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hicegauntlets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hgauntletice","Ice Troll at Glacial Tarn - Mutation 1+","https://nwdb.info/db/creature/icegolem"
-  "2","S3","Magical Weapons","Lifetaker","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hvoidgauntlets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hgauntletvoid","Pugnacious Purutu at Elysian Wilds","https://nwdb.info/db/creature/fl_gorilla_melee_elite_named_09fl12"
-  "2","S3","2-Handed Weapons","Pestilence","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hblunderbusss3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hblunderbuss","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_2hblunderbuss"
-  "2","S3","2-Handed Weapons","Serenity","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hgreatswords3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hgreatsword","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_2hgreatsword"
-  "2","S3","1-Handed Weapons","Odo","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hflails3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hflail","Vanash at Elysian Wilds","https://nwdb.info/db/creature/fl_barbary_lion_elite_named_09fl01"
-  "1","S3","Trinkets","Endless Thirst","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/angryearthearring30.png","https://nwdb.info/db/item/artifact_set1_earring1","Season 3 Pass Reward at Free Track Lvl 100","https://nwdb.info/db/item/artifact_set1_earring1"
-  "1","S3","Trinkets","Blooddrinker","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/corruptedring20.png","https://nwdb.info/db/item/artifact_set1_ring1","Greundgul the Regent at Starstone Borrows - Mutation 1+","https://nwdb.info/db/creature/ancientguardian_heavy_boss_named_dg_everfall_00"
-  "1","S3","Trinkets","Lost Stopwatch","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/lostamulet10.png","https://nwdb.info/db/item/artifact_set1_amulet1","Commander Thorpe at The Depths - Mutation 1+","https://nwdb.info/db/creature/damned_longswordsman_commander_named_dg_restless_00"
-  "1","S3","Trinkets","Ankh","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/corruptedamulet30.png","https://nwdb.info/db/item/artifact_set1_amulet2","PvP Track 20+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_amulet2"
-  "1","S5","Gloves","Gilli's Gravity Gauntlets","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_gravitygauntlets_gloves.png","https://ptr.nwdb.info/db/item/artifact_set2_heavyhands","Eternal Pools Trial at The Eternal Pool","https://ptr.nwdb.info/db/zone/7005"
-  "1","S5","Legwear","Ironheart","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_stabilitypants_legs.png","https://ptr.nwdb.info/db/item/artifact_set2_heavylegs","PvP Track 29+","https://ptr.nwdb.info/db/item/artifact_set2_heavylegs"
-  "1","S5","Chestwear","Nature's Wrath","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_natureswrath_chest.png","https://ptr.nwdb.info/db/item/artifact_set2_mediumchest","Zygoramet Trial at Zygoramet's Grove","https://nwdb.info/db/zone/7001"
-  "1","S5","Footwear","Creed Boots","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_creedboots_feet.png","https://ptr.nwdb.info/db/item/artifact_set2_lightfeet","Season 5 Pass Reward at Free Track Lvl 20","https://ptr.nwdb.info/db/item/artifact_set2_lightfeet"
-  "2","S5","1-Handed Weapons","Sin","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/1hhatchetseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_1hthrowingaxe","Colossus of Memnon at Brimstone Sands","https://ptr.nwdb.info/db/creature/ancient_amalgam_named_16bs11b"
-  "2","S5","2-Handed Weapons","Tempest Fury","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/2hgreataxeseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_2hgreataxe","From Winter Rune Forge Spoils obtainable at Winter Rune Forge","https://ptr.nwdb.info/db/item/trial_s5_bonusbox"
-  "2","S5","2-Handed Weapons","Venom","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/2hspearseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_2hspear","Siren Queen Trial at the Spire of Melpomene","https://nwdb.info/db/zone/7004"
-  "1","S5","Trinkets","Phoenix","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/ancientamulet13.png","https://ptr.nwdb.info/db/item/artifact_set2_amulet1","Season 5 Pass Reward at Free Track Lvl 80","https://ptr.nwdb.info/db/item/artifact_set2_amulet1"
+  "1","S3","Headwear","Unyielding","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyhelmet3_head.png","https://nwdb.info/db/item/artifact_set1_heavyhead","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_heavyhead"
+"1","S3","Chestwear","Void Darkplate","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavychest6_chest.png","https://nwdb.info/db/item/artifact_set1_heavychest","Nereid at Barnacles & Black Powder - Mutation 1+","https://nwdb.info/db/creature/dryad_siren"
+"1","S3","Gloves","Magnetic Gauntlets","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms1_gloves.png","https://nwdb.info/db/item/artifact_set1_heavyhands","Isabella at Tempest's Heat - Mutation 1+","https://nwdb.info/db/creature/isabella_dg_shattermtn_phase2_00"
+"1","S3","Legwear","Freedom","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumthighs3_legs.png","https://nwdb.info/db/item/artifact_set1_heavylegs","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_heavylegs"
+"1","S4","Footwear","The Unmoved","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavycalves2_feet.png","https://nwdb.info/db/item/artifact_set1_heavyfeet","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_heavyfeet"
+"1","S3","Headwear","Djinn Headwrap","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_harbingermediumsmile_head.png","https://nwdb.info/db/item/artifact_set1_mediumhead","Gathered from Elite Beast Hoard","https://nwdb.info/db/item/artifact_set1_mediumhead"
+"1","S3","Chestwear","Nimble Coat","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_wraithhunterlightnailst3_chest.png","https://nwdb.info/db/item/artifact_set1_mediumchest","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_mediumchest"
+"1","S3","Gloves","Ghoul Gloves","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendaryheavyforearms2_gloves.png","https://nwdb.info/db/item/artifact_set1_mediumhands","Overgrown Guardian or Adiana's Chosen Beast at Elysian Wilds","https://nwdb.info/db/creature/fl_dryad_beast_named_09fl03"
+"1","S3","Legwear","Attuned Leather Pants","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumthighs1_legs.png","https://nwdb.info/db/item/artifact_set1_mediumlegs","Quest Reward - The End of New Eden","https://nwdb.info/db/quest/09a_m15_fightartemis"
+"1","S4","Footwear","Winged Leather Shoes","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarymediumcalves1_feet.png","https://nwdb.info/db/item/artifact_set1_mediumfeet","Helianthus at Elysyan Wilds","https://nwdb.info/db/creature/fl_megaflora_razorlotus_named_09fl02a"
+"1","S3","Headwear","Grey Wizard's Hat","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/cloth_setb_hat_t4.png","https://nwdb.info/db/item/artifact_set1_lighthead","Corrupted Major Breach Lv. 65 at Brimstone Sands/Shattered Mountain/Reekwater","https://nwdb.info/db/item/artifact_set1_lighthead"
+"1","S3","Chestwear","Featherweight","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_legendarylightchest2_chest.png","https://nwdb.info/db/item/artifact_set1_lightchest","Ner' Mur at Elysian Wilds","https://nwdb.info/db/creature/fl_hercyne_corvid_named_09fl10"
+"1","S4","Gloves","Quickdraw Gloves","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_nagacorruptedmedium_hands.png","https://nwdb.info/db/item/artifact_set1_lighthands","Ipomoea at Elysyan Wilds","https://nwdb.info/db/creature/fl_megaflora_razorlotus_named_09fl02b"
+"1","S4","Legwear","Koya's Knee Guards","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_nagacorruptedmedium_legs.png","https://nwdb.info/db/item/artifact_set1_lightlegs","Outpost Rush Cache Lv 61 - 65","https://nwdb.info/db/item/artifact_set1_lightlegs"
+"1","S3","Footwear","Tumbler Feetwraps","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/m_hexencirce_feet.png","https://nwdb.info/db/item/artifact_set1_lightfeet","Outpost Rush Cache Lv 61 - 65","https://nwdb.info/db/item/artifact_set1_lightfeet"
+"2","S3","1-Handed Weapons","The Butcher","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hswords3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hlongsword","Zhou Taiying at Dynasty Shipyard - Mutation 1+","https://nwdb.info/db/creature/dynasty_empress"
+"2","S3","1-Handed Weapons","Freya's Francisca","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hhatchets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hthrowingaxe","The Blighted Greenskeeper at Garden of Genesis - Mutation 1+","https://nwdb.info/db/creature/naga_angryearth"
+"2","S3","2-Handed Weapons","Spark of Mjölnir","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hwarhammers3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hwarhammer","Chardis at Lazarus Instrumentality - Mutation 1+","https://nwdb.info/db/creature/torso_boss"
+"2","S3","2-Handed Weapons","The Abyss","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hgreataxes3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hgreataxe","Corrupted Major Breach Lv. 65 at Brimstone Sands/Shattered Mountain/Reekwater","https://nwdb.info/db/item/artifact_set1_2hgreataxe"
+"2","S4","2-Handed Weapons","Boltcaster","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hbows3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hbow","Annoyed Aguascia at Elysian Wilds","https://nwdb.info/db/creature/fl_gorilla_ice_elite_named_09fl12"
+"2","S3","2-Handed Weapons","The Mechanic","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hmuskets3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hmusket","Toy Maker Phthah at Elysian Wilds","https://nwdb.info/db/creature/fl_ancientguardian_mage_named_elite_09fl06"
+"2","S4","Shields","Gladiator","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hroundshields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hroundshield","Tribunal Ice Mammoth at Elysian Wilds","https://nwdb.info/db/creature/fl_mammoth_ice_elite_09fl01"
+"2","S3","Shields","Michael","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hkiteshields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hkiteshield","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_1hkiteshield"
+"2","S3","Shields","The Wall","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1htowershields3artifacts.png","https://nwdb.info/db/item/artifact_set1_1htowershield","Heru at The Ennead - Mutation 1+","https://nwdb.info/db/creature/anubianguardian_horus_boss"
+"2","S3","Magical Weapons","Inferno","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hfirestaffs3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hstafffire","Commander Marius at Empyrean Forge - Mutation 1+","https://nwdb.info/db/creature/evil_knight_fire_champion_dg_greatcleave_01"
+"2","S4","Magical Weapons","Vengeance","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hlifestaffs3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hstafflife","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_2hstafflife"
+"2","S3","2-Handed Weapons","Scorpion's Sting","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hspears3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hspear","Scorpio Supernal at Brimstone Sands","https://nwdb.info/db/creature/desert_scorpion_named_04"
+"2","S3","1-Handed Weapons","Finisher","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hrapiers3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hrapier","Montrapala the Unruled at Elysian Wilds","https://nwdb.info/db/creature/fl_mammoth_named_elite_09fl12"
+"2","S4","Magical Weapons","Deep Freeze","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hicegauntlets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hgauntletice","Snorok Ice Fist at Glacial Tarn - Mutation 1+","https://nwdb.info/db/creature/icegolem"
+"2","S3","Magical Weapons","Lifetaker","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hvoidgauntlets3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hgauntletvoid","Pugnacious Purutu at Elysian Wilds","https://nwdb.info/db/creature/fl_gorilla_melee_elite_named_09fl12"
+"2","S3","2-Handed Weapons","Pestilence","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hblunderbusss3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hblunderbuss","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_2hblunderbuss"
+"2","S3","2-Handed Weapons","Serenity","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/2hgreatswords3artifacts.png","https://nwdb.info/db/item/artifact_set1_2hgreatsword","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_2hgreatsword"
+"2","S3","1-Handed Weapons","Odo","https://cdn.nwdb.info/db/images/live/v42/icons/items/weapon/1hflails3artifacts.png","https://nwdb.info/db/item/artifact_set1_1hflail","Vanash at Elysian Wilds","https://nwdb.info/db/creature/fl_barbary_lion_elite_named_09fl01"
+"1","S3","Trinkets","Endless Thirst","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/angryearthearring30.png","https://nwdb.info/db/item/artifact_set1_earring1","Mahantaram at Savage Divide","https://nwdb.info/db/creature/fl_mammoth_boss_dg_firstlight_01"
+"1","S3","Trinkets","Blooddrinker","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/corruptedring20.png","https://nwdb.info/db/item/artifact_set1_ring1","Greundgul the Regent at Starstone Borrows - Mutation 1+","https://nwdb.info/db/creature/ancientguardian_heavy_boss_named_dg_everfall_00"
+"1","S3","Trinkets","Lost Stopwatch","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/lostamulet10.png","https://nwdb.info/db/item/artifact_set1_amulet1","Commander Thorpe at The Depths - Mutation 1+","https://nwdb.info/db/creature/damned_longswordsman_commander_named_dg_restless_00"
+"1","S3","Trinkets","Ankh","https://cdn.nwdb.info/db/images/live/v42/icons/items/armor/corruptedamulet30.png","https://nwdb.info/db/item/artifact_set1_amulet2","PvP Track 29+ at Checkpoint 3","https://nwdb.info/db/item/artifact_set1_amulet2"
+"1","S5","Gloves","Gilli's Gravity Gauntlets","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_gravitygauntlets_gloves.png","https://ptr.nwdb.info/db/item/artifact_set2_heavyhands","Eternal Pools Trial at The Eternal Pool","https://ptr.nwdb.info/db/zone/7005"
+"1","S5","Legwear","Ironheart","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_stabilitypants_legs.png","https://ptr.nwdb.info/db/item/artifact_set2_heavylegs","PvP Track 29+ at Checkpoint 3","https://ptr.nwdb.info/db/item/artifact_set2_heavylegs"
+"1","S5","Chestwear","Nature's Wrath","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_natureswrath_chest.png","https://ptr.nwdb.info/db/item/artifact_set2_mediumchest","Zygoramet Trial at Zygoramet's Grove","https://nwdb.info/db/zone/7001"
+"1","S5","Footwear","Creed Boots","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/m_season5artifacts_creedboots_feet.png","https://ptr.nwdb.info/db/item/artifact_set2_lightfeet","Attalu's Foundry (ECR)","https://nwdb.info/db/zone/30335"
+"2","S5","1-Handed Weapons","Sin","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/1hhatchetseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_1hthrowingaxe","Colossus of Memnon at Brimstone Sands","https://ptr.nwdb.info/db/creature/ancient_amalgam_named_16bs11b"
+"2","S5","2-Handed Weapons","Tempest Fury","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/2hgreataxeseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_2hgreataxe","From Winter Rune Forge Spoils obtainable at Winter Rune Forge","https://ptr.nwdb.info/db/item/trial_s5_bonusbox"
+"2","S5","2-Handed Weapons","Venom","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/weapon/2hspearseason5artifactst5.png","https://ptr.nwdb.info/db/item/artifact_set2_2hspear","Siren Queen Trial at the Spire of Melpomene","https://nwdb.info/db/zone/7004"
+"1","S5","Trinkets","Phoenix","https://cdn.nwdb.info/db/images/ptr/v30/icons/items/armor/ancientamulet13.png","https://ptr.nwdb.info/db/item/artifact_set2_amulet1","Palace Maiden Xiao at Imperial Palace","https://nwdb.info/db/creature/dynasty_maiden_named_08qp08"
+"2","S6","2-Handed Weapons","Grace","https://cdn.nwdb.info/db/images/live/v48/icons/items/weapon/app_artifactss7_greatsword.png","https://nwdb.info/db/item/artifact_set2_2hgreatsword","Season 6 - Level 80","https://nwdb.info/db/item/artifact_set2_2hgreatsword"
+"2","S6","2-Handed Weapons","Trsna","https://cdn.nwdb.info/db/images/live/v48/icons/items/weapon/app_artifactss7_warhammer.png","https://nwdb.info/db/item/artifact_set2_2hwarhammer","Typhon at Hive of Gorgons","https://nwdb.info/db/creature/hercyne_typhon"
+"1","S6","Headwear","Cowl of Power","https://cdn.nwdb.info/db/images/live/v48/icons/items/armor/m_s7artifacts_cowlofpower_head.png","https://nwdb.info/db/item/artifact_set2_lighthead","Season 6 - Level 20","https://nwdb.info/db/item/artifact_set2_lighthead"
+"1","S6","Legwear","Azoth Conductors","https://cdn.nwdb.info/db/images/live/v48/icons/items/armor/m_s7artifacts_azothconductors_legs.png",https://nwdb.info/db/item/artifact_set2_mediumlegs","Echidna at Hive of Gorgons","https://nwdb.info/db/creature/hercyne_echidna"
+"1","S6","Gloves","Ghostly Touch","https://cdn.nwdb.info/db/images/live/v48/icons/items/armor/m_s7artifacts_ghostlytouch_gloves.png","https://nwdb.info/db/item/artifact_set2_mediumhands","Crafting - 6000 Mystic Doubloons","https://nwdb.info/db/item/artifact_set2_mediumhands"
+"2","S6","1-Handed Weapons","Power Stone","https://cdn.nwdb.info/db/images/live/v48/icons/items/weapon/app_artifactss7_flail.png",https://nwdb.info/db/item/artifact_set2_1hflail","Completion of Daily Trial","https://nwdb.info/db/item/artifact_set2_1hflail"
+"1","S6","Trinkets","Elemental Band","https://cdn.nwdb.info/db/images/live/v48/icons/items/armor/angryearthring21.png","https://nwdb.info/db/item/artifact_set2_ring1","Broodmother Medusa at Hive of Gorgons","https://nwdb.info/db/creature/hercyne_broodmother"
+"1","S6","Chestwear","Suvivor's Coat","https://cdn.nwdb.info/db/images/live/v48/icons/items/armor/m_s7artifacts_survivorscoat_chest.png","https://nwdb.info/db/item/artifact_set2_heavychest","Crafting - 6000 Mystic Doubloons","https://nwdb.info/db/item/artifact_set2_heavychest"
   `;
         var lines = csvData.trim().split('\n');
         var header = lines.shift();
@@ -680,6 +689,7 @@
         var season3Btn = document.getElementById("season3");
         var season4Btn = document.getElementById("season4");
         var season5Btn = document.getElementById("season5");
+        var season6Btn = document.getElementById("season6");
 
         function toggleSeasonArtifacts(season) {
             for (const [key, value] of Object.entries(structuredData)) {
@@ -700,6 +710,7 @@
             season3Btn.classList.remove('selected')
             season4Btn.classList.remove('selected')
             season5Btn.classList.remove('selected')
+            season6Btn.classList.remove('selected')
             for (const [key, value] of Object.entries(structuredData)) {
                 value.forEach(item => {
                     item['htmlEl'].classList.remove('disabled');
@@ -713,6 +724,7 @@
             seasonAll.classList.remove('selected')
             season4Btn.classList.remove('selected')
             season5Btn.classList.remove('selected')
+            season6Btn.classList.remove('selected')
             toggleSeasonArtifacts("S3")
             season3Btn.classList.add('selected')
         });
@@ -721,6 +733,7 @@
             seasonAll.classList.remove('selected')
             season3Btn.classList.remove('selected')
             season5Btn.classList.remove('selected')
+            season6Btn.classList.remove('selected')
             toggleSeasonArtifacts("S4")
             season4Btn.classList.add('selected')
         });
@@ -729,8 +742,18 @@
             seasonAll.classList.remove('selected')
             season3Btn.classList.remove('selected')
             season4Btn.classList.remove('selected')
+            season6Btn.classList.remove('selected')
             toggleSeasonArtifacts("S5")
             season5Btn.classList.add('selected')
+        });
+
+        season6Btn.addEventListener("click", function () {
+            seasonAll.classList.remove('selected')
+            season3Btn.classList.remove('selected')
+            season4Btn.classList.remove('selected')
+            season5Btn.classList.remove('selected')
+            toggleSeasonArtifacts("S6")
+            season6Btn.classList.add('selected')
         });
 
         const tabs = document.querySelectorAll('.tab');
