@@ -449,6 +449,7 @@
                 <button id="season4">S4</button>
                 <button id="season5">S5</button>
                 <button id="season6">S6</button>
+                <button id="season7">S7</button>
             </div>
             <div class="sections">
                 <div class="container-wrapper-1 spacing"></div>
@@ -698,6 +699,7 @@
         var season4Btn = document.getElementById("season4");
         var season5Btn = document.getElementById("season5");
         var season6Btn = document.getElementById("season6");
+        var season7Btn = document.getElementById("season7");
 
         function toggleSeasonArtifacts(season) {
             for (const [key, value] of Object.entries(structuredData)) {
@@ -719,6 +721,7 @@
             season4Btn.classList.remove('selected')
             season5Btn.classList.remove('selected')
             season6Btn.classList.remove('selected')
+            season7Btn.classList.remove('selected')
             for (const [key, value] of Object.entries(structuredData)) {
                 value.forEach(item => {
                     item['htmlEl'].classList.remove('disabled');
@@ -733,6 +736,7 @@
             season4Btn.classList.remove('selected')
             season5Btn.classList.remove('selected')
             season6Btn.classList.remove('selected')
+            season7Btn.classList.remove('selected')
             toggleSeasonArtifacts("S3")
             season3Btn.classList.add('selected')
         });
@@ -742,6 +746,7 @@
             season3Btn.classList.remove('selected')
             season5Btn.classList.remove('selected')
             season6Btn.classList.remove('selected')
+            season7Btn.classList.remove('selected')
             toggleSeasonArtifacts("S4")
             season4Btn.classList.add('selected')
         });
@@ -751,6 +756,7 @@
             season3Btn.classList.remove('selected')
             season4Btn.classList.remove('selected')
             season6Btn.classList.remove('selected')
+            season7Btn.classList.remove('selected')
             toggleSeasonArtifacts("S5")
             season5Btn.classList.add('selected')
         });
@@ -760,8 +766,19 @@
             season3Btn.classList.remove('selected')
             season4Btn.classList.remove('selected')
             season5Btn.classList.remove('selected')
+            season7Btn.classList.remove('selected')
             toggleSeasonArtifacts("S6")
             season6Btn.classList.add('selected')
+        });
+
+        season7Btn.addEventListener("click", function () {
+            seasonAll.classList.remove('selected')
+            season3Btn.classList.remove('selected')
+            season4Btn.classList.remove('selected')
+            season5Btn.classList.remove('selected')
+            season6Btn.classList.remove('selected')
+            toggleSeasonArtifacts("S7")
+            season7Btn.classList.add('selected')
         });
 
         const tabs = document.querySelectorAll('.tab');
